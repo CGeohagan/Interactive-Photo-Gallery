@@ -88,9 +88,6 @@ var prevImage = function(){
 };
 
 
-
-
-
 //If you click the right arrow, call the next image function
 $(".rightArrow").click(function(){
   nextImage();
