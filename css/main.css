@@ -4,19 +4,19 @@
   list-style: none;
   box-sizing: border-box;
   display: inline-block;
-  padding: 30px;
+  padding: 28px;
   margin-right: -4px;
 }
 
 .photo-thumbnails li img {
   max-width: 200px;
+  border: 2px solid lightgray;
 }
 
 ul.photo-thumbnails {
   margin: 0 auto;
-  max-width: 1040px;
   text-align: center;
-  padding: 0 0 30px 0;
+  padding: 0 0 20px 0;
 }
 
 .title, form {
@@ -24,10 +24,13 @@ ul.photo-thumbnails {
 } 
 
 input[type="search"] {
-  width: 460px;
+  margin-top: 20px;
+  margin-bottom: 2px;
+  width: 200px;
+  padding: 8px;
   font-size: 16pt;
   border-radius: 5px;
-  border: 2px solid #46698b;
+  border: 2px solid lightgray;
 }
 
 .clearfix::after {
@@ -49,20 +52,22 @@ input[type="search"] {
   text-align: center;
 }
 
-#overlay img {
+#overlay img, #overlay iframe {
   margin-top: 10%;
   margin-bottom: 6%;
-  max-width: 800px;
-  width: 65%;
+  width: 80%;
   position: relative;
   z-index: 20;
   
 }
 
+iframe {
+  height: 300px;
+}
+
 #overlay p {
   color: white;
-  width:50%;
-  max-width: 600px;
+  width:60%;
   margin: 0 auto;
   font-size: 16px;
   font-weight: 100;
@@ -74,18 +79,68 @@ input[type="search"] {
   color: white;
   position: absolute;
   z-index: 1000;
-  margin-top: 28%;
   cursor: pointer;
 }
 
+.fa-times{
+  right: 1%;
+  top: 1%;
+}
+
 .fa-chevron-circle-left {
-  left: 10%;
+  left: 43%;
+  margin-top: 2%;
 }
 
 .fa-chevron-circle-right {
-  right: 10%;
+  right: 43%;
+  margin-top: 2%;
+}
+
+.no-padding {
+  padding: 0px;
 }
 
 
+/* Styles for medium screens */
+@media screen and (min-width: 768px) {
+  ul.photo-thumbnails {
+    max-width: 1040px;
+    padding: 0 0 30px 0;
+  }
 
+
+  input[type="search"] {
+    margin-top: 30px;
+    margin-bottom: 2px;
+    width: 460px;
+  }
+
+
+  #overlay img, #overlay iframe {
+    max-width: 800px;
+    width: 65%;
+  }
+
+  iframe {
+    height: 400px;
+  }
+
+  #overlay p {
+    width:50%;
+    max-width: 600px;
+  }
+
+
+  .fa-chevron-circle-left {
+    left: 10%;
+    margin-top: 28%;
+  }
+
+  .fa-chevron-circle-right {
+    right: 10%;
+    margin-top: 28%;
+  }
+
+}
 

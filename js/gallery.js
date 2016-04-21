@@ -1,18 +1,26 @@
-//Problem: User when clicking on image goes to a dead end.
-//Solution: Create an overlay with the large image. Lightbox.
+/***********************************************************************
+Lightbox Gallery
+***********************************************************************/
+
 
 var $overlay = $('<div id="overlay"></div>');
 var $image = $("<img>");
 var $leftArrow = $('<span class="leftArrow fa fa-chevron-circle-left"></span>');
 var $rightArrow = $('<span class="rightArrow fa fa-chevron-circle-right"></span>');
+var $exit = $('<span class="fa fa-times" aria-hidden="true"></span>');
 var $caption = $("<p></p>");
+var $video = $("<iframe frameborder='0' allowfullscreen></iframe>");
 var $selectedImage;
-var imageLocation;
-var captionText;
 
 
 //Add image to overlay
 $overlay.append($image);
+
+//Add video to overlay
+$overlay.append($video);
+
+//Add exit to overlay
+$overlay.append($exit);
 
 //Add left arrow to overlay
 $overlay.append($leftArrow);
@@ -26,63 +34,80 @@ $overlay.append($caption);
 //Add overlay.
 $("body").append($overlay);
 
-
-
-
-//Capture the click event on a link to an image.
-  $(".photo-thumbnails a").click(function(event) {
-    $selectedImage = $(this);
-    event.preventDefault();
-    imageLocation = $(this).attr("href");
-    $image.attr("src", imageLocation);
+//Create function to show get information for and show image or video when traversing through images
+var showMedia = function(){
+        if ($selectedImage.hasClass('photo')) {
+        //Hide the video and show the image
+        $video.detach();
+        $overlay.prepend($image);
+        var imageLocation = $selectedImage.attr("href");
+        $image.attr("src", imageLocation);
+    } else if ($selectedImage.hasClass('video')){
+        //Hide the image and show the video
+        $image.detach();
+        var videoURL = $selectedImage.attr('href');
+        //Give the video the player id
+        $video.attr("src", videoURL);
+        $overlay.prepend($video);
+    }
+    
     //Show the overlay.
     $overlay.show();
     //Get child's alt attribute 
-    captionText = $(this).children("img").attr("alt");
+    var captionText = $selectedImage.children("img").attr("alt");
     $caption.text(captionText);
+
+    //When you click on the overlay, hide it
+    $exit.click(function() {
+        //Hide the overlay.
+        $overlay.hide();
+    });
+
+};
+
+//Capture the click event on a link to an image.
+  $(".photo-thumbnails a").click(function(event) {
+    event.preventDefault();
+    $selectedImage = $(this);
+    showMedia();
   });
    
-  
 
  //Function for when right arrow is clicked
-function nextImage(){
+var nextImage = function(){
     //Traverse to next image in gallery
-    $selectedImage = $selectedImage.next();
-    //Update overlay with new image location
-    imageLocation = $selectedImage.attr("href");
-    //Update the image for the overlay
-    $image.attr("src", imageLocation);      
-    //Get child's alt attribute 
-    captionText = $selectedImage.children("img").attr("alt");
-    //Make image alt attribute the caption
-    $caption.text(captionText);  
-} 
+    $selectedImage = $selectedImage.parent('li').next('li').children('a');
+    showMedia();
+};
 
 //Function for when previous arrow is clicked
-function prevImage(){
+var prevImage = function(){
     //Traverse to previous image in gallery
-    $selectedImage = $selectedImage.prev();
-    //Update overlay with new image location
-    imageLocation = $selectedImage.attr("href");
-    //Update the image for the overlay
-    $image.attr("src", imageLocation);      
-    //Get child's alt attribute 
-    captionText = $selectedImage.children("img").attr("alt");
-    //Make image alt attribute the caption
-    $caption.text(captionText);  
-} 
+    $selectedImage = $selectedImage.parent('li').prev('li').children('a');
+    showMedia();
+};
 
 
 
+
+
+//If you click the right arrow, call the next image function
 $(".rightArrow").click(function(){
   nextImage();
 });
 
+//If you click the left arrow, call the prev image function
 $(".leftArrow").click(function(){
   prevImage();
 });
 
-
-
-
+//Call the next or previous image function using arrow keys
+$("body").keydown(function(e) {
+  if(e.which == 37) { // left     
+      prevImage();
+  }
+  else if(e.which == 39) { // right     
+      nextImage();
+  }
+});
 
