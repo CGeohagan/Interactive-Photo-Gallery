@@ -1,22 +1,50 @@
 /* Layout */
 
+* {
+  font-family: 'Work Sans', sans-serif;
+}
+
+h1 {
+    font-size: 1.8em;
+    margin: 50px auto 0;
+    padding: 48px 0 20px;
+    width: 95%;
+    text-align: center;
+    border-top: 1px solid #dddfdb;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
 .photo-thumbnails li {
   list-style: none;
   box-sizing: border-box;
-  display: inline-block;
   padding: 28px;
   margin-right: -4px;
 }
 
 .photo-thumbnails li img {
   max-width: 200px;
-  border: 2px solid lightgray;
+  padding: 3px;
+  border: 1px solid #dddfdb;
+}
+
+.photo-thumbnails li img:hover {
+  opacity: .5;
 }
 
 ul.photo-thumbnails {
   margin: 0 auto;
   text-align: center;
   padding: 0 0 20px 0;
+  display: flex;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  flex-direction: row;
+  -webkit-flex-direction: row; 
+  flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  justify-content: center;
+  -webkit-justify-content: center;
 }
 
 .title, form {
@@ -24,19 +52,15 @@ ul.photo-thumbnails {
 } 
 
 input[type="search"] {
-  margin-top: 20px;
+  margin: 20px 0;
   margin-bottom: 2px;
   width: 200px;
   padding: 8px;
-  font-size: 16pt;
+  font-size: 1em;
   border-radius: 5px;
-  border: 2px solid lightgray;
-}
-
-.clearfix::after {
-    content: "";
-    display: table;
-    clear: both;
+  text-transform: uppercase;
+  font-weight: 100;
+  border: 1px solid #dddfdb;
 }
 
 /* Overlay Styles */
@@ -52,24 +76,35 @@ input[type="search"] {
   text-align: center;
 }
 
-#overlay img, #overlay iframe {
-  margin-top: 10%;
-  margin-bottom: 6%;
-  width: 80%;
+#overlay img {
+  margin: 15% auto 0;
   position: relative;
   z-index: 20;
-  
+  display: block;
 }
 
-iframe {
-  height: 300px;
+#overlay img, #overlay .caption {
+  width: 55%;
+}
+
+#overlay .caption, #overlay h2, #overlay p {
+  margin: 0 auto;
+}
+
+#overlay .caption {
+  background-color: white;
+  padding: 1.5em 0;
+}
+
+#overlay h2 {
+  padding-bottom: .5em;
+  font-size: 1.3em;
 }
 
 #overlay p {
-  color: white;
-  width:60%;
-  margin: 0 auto;
-  font-size: 16px;
+  color: black;
+  padding: 0;
+  font-size: 1em;
   font-weight: 100;
   line-height: 26px;
 }
@@ -89,12 +124,12 @@ iframe {
 
 .fa-chevron-circle-left {
   left: 43%;
-  margin-top: 2%;
+  top: 2%;
 }
 
 .fa-chevron-circle-right {
   right: 43%;
-  margin-top: 2%;
+  top: 2%;
 }
 
 .no-padding {
@@ -109,36 +144,31 @@ iframe {
     padding: 0 0 30px 0;
   }
 
-
   input[type="search"] {
     margin-top: 30px;
     margin-bottom: 2px;
     width: 460px;
   }
 
+  #overlay img {
+    margin: 10% auto 0;
+  }
 
-  #overlay img, #overlay iframe {
+  #overlay img, #overlay .caption {
     max-width: 800px;
-    width: 65%;
-  }
-
-  iframe {
-    height: 400px;
-  }
-
-  #overlay p {
-    width:50%;
-    max-width: 600px;
+    width: 45%;
   }
 
   .fa-chevron-circle-left {
     left: 10%;
-    margin-top: 28%;
+    margin-top: -25%;
+    top: initial;
   }
 
   .fa-chevron-circle-right {
     right: 10%;
-    margin-top: 28%;
+    margin-top: -25%;
+    top:initial;
   }
 
 }
