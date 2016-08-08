@@ -77,6 +77,12 @@ var showMedia = function(){
 var nextImage = function(){
     //Traverse to next image in gallery
     $selectedImage = $selectedImage.parent('li').next('li').children('a');
+    $leftArrow.css("display", "inline-block");
+    if ($selectedImage.hasClass('last')) {
+      $rightArrow.hide();
+    } else {
+      $rightArrow.css("display", "inline-block");
+    }
     showMedia();
 };
 
@@ -84,6 +90,12 @@ var nextImage = function(){
 var prevImage = function(){
     //Traverse to previous image in gallery
     $selectedImage = $selectedImage.parent('li').prev('li').children('a');
+    $rightArrow.css("display", "inline-block");
+    if ($selectedImage.hasClass('first')) {
+      $leftArrow.hide();
+    } else {
+      $leftArrow.css("display", "inline-block");
+    }
     showMedia();
 };
 
