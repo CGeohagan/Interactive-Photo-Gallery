@@ -2,7 +2,7 @@
 Lightbox Gallery
 ***********************************************************************/
 //When the AJAX function is complete, this code will run
-$( document ).ajaxComplete(function() {
+
 
   var $overlay = $('<div id="overlay"></div>');
   var $image = $("<img>");
@@ -35,9 +35,7 @@ $( document ).ajaxComplete(function() {
   //Add overlay.
   $("body").append($overlay);
 
-  //Add class first and last to beginning and ending list items
-  $('li').first().children('a').addClass('first');
-  $('li').last().children('a').addClass('last');
+ 
 
   //Create function to show get information for and show image or video when traversing through images
   var showMedia = function(){
@@ -126,4 +124,53 @@ $( document ).ajaxComplete(function() {
     }
   });
 
-}); //Ajax Complete
+
+ //Function for when right arrow is clicked
+var nextImage = function(){
+    //Traverse to next image in gallery
+    $selectedImage = $selectedImage.parent('li').next('li').children('a');
+    $leftArrow.css("display", "inline-block");
+    if ($selectedImage.hasClass('last')) {
+      $rightArrow.hide();
+    } else {
+      $rightArrow.css("display", "inline-block");
+    }
+    showMedia();
+};
+
+//Function for when previous arrow is clicked
+var prevImage = function(){
+    //Traverse to previous image in gallery
+    $selectedImage = $selectedImage.parent('li').prev('li').children('a');
+    $rightArrow.css("display", "inline-block");
+    if ($selectedImage.hasClass('first')) {
+      $leftArrow.hide();
+    } else {
+      $leftArrow.css("display", "inline-block");
+    }
+    showMedia();
+};
+
+
+//If you click the right arrow, call the next image function
+$(".rightArrow").click(function(){
+  nextImage();
+});
+
+//If you click the left arrow, call the prev image function
+$(".leftArrow").click(function(){
+  prevImage();
+});
+
+//Call the next or previous image function using arrow keys
+$("body").keydown(function(e) {
+  if(e.which == 37) { // left     
+      prevImage();
+  }
+  else if(e.which == 39) { // right     
+      nextImage();
+  }
+});
+
+
+
